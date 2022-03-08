@@ -13,6 +13,10 @@ class User < ActiveRecord::Base
     # self.first.books
   end
 
+  def create_book(book)
+    Book.create(title: book.title, image: book.image, description: book.description)
+  end
+
 # list book as available for other users
   # def sell_books(user, book)
   #   if book.book_id == self
