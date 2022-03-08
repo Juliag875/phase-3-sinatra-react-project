@@ -10,12 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_07_224725) do
+ActiveRecord::Schema.define(version: 2022_03_08_203509) do
 
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.text "description"
-    t.integer "rating"
     t.string "image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,6 +24,7 @@ ActiveRecord::Schema.define(version: 2022_03_07_224725) do
     t.integer "book_id"
     t.integer "user_id"
     t.boolean "available"
+    t.integer "rating"
     t.index ["book_id"], name: "index_user_books_on_book_id"
     t.index ["user_id"], name: "index_user_books_on_user_id"
   end
