@@ -13,9 +13,10 @@ class User < ActiveRecord::Base
     # self.first.books
   end
 
-  def create_book(book)
-    Book.create(title: book.title, image: book.image, description: book.description)
-  end
+  # def create_user_book()
+  #   # params = {all things react sent back}
+  #   UserBook.create(user_id:  ,book_id: ,available: false, rating: 0)
+  # end
 
 # list book as available for other users
   # def sell_books(user, book)
