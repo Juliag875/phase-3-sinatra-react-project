@@ -16,8 +16,12 @@ class ApplicationController < Sinatra::Base
   end 
 
   # get a book
-  get "/mybooks/:id" do
-    User.find(params[:id]).books.all.to_json
+  # get "/mybooks/:id" do
+  #   User.find(params[:id]).books_plus_join_data.to_json
+  # end
+
+  get "/mybooks" do
+    User.first.books_plus_join_data.to_json
   end
 
   post "/users/:id" do 

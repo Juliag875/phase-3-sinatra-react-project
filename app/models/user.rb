@@ -13,6 +13,18 @@ class User < ActiveRecord::Base
     # self.first.books
   end
 
+
+  def books_plus_join_data
+    self.user_books.map do |user_book|
+      {
+        user_book_id: user_book.id, 
+        available: user_book.available,
+        rating: user_book.rating,
+        book: user_book.book
+      }
+    end 
+  end 
+
   # def create_user_book()
   #   # params = {all things react sent back}
   #   UserBook.create(user_id:  ,book_id: ,available: false, rating: 0)
