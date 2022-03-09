@@ -33,12 +33,14 @@ class ApplicationController < Sinatra::Base
 
   # post "/users/:id" do 
     post "/mybooks" do 
-    User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0).to_json
+      User.second.user_books.create(available: false, rating: 0).to_json
+    end
+    # User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0).to_json
 
     # params = {user_id: 1, book_id: 10, availble: false, rating: 0}
     
-    UserBook.create(params).to_json
-  end
+    # UserBook.create(params).to_json
+
 
   patch '/books/:id' do
     UserBook.find(params[:id]).update(rating: params[:rating]).to_json
