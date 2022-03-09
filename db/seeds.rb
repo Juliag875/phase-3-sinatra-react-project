@@ -8,6 +8,7 @@ puts "🌱 Seeding user..."
   end
 
 puts "🌱 Seeding books..."
+
   10.times do 
     Book.create(
       title: Faker::Book.title,

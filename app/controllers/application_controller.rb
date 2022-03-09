@@ -15,18 +15,25 @@ class ApplicationController < Sinatra::Base
     User.find(params[:id]).to_json
   end 
 
+  # all available books
+  get '/availablebooks' do
+    Book.second.books_plus_join_data.to_json
+    # UserBook.all.where("available = ?", true).to_json
+  end
+
+
   # get a book
   # get "/mybooks/:id" do
   #   User.find(params[:id]).books_plus_join_data.to_json
   # end
 
   get "/mybooks" do
-    User.first.books_plus_join_data.to_json
+    User.second.books_plus_join_data.to_json
   end
 
-  post "/users/:id" do 
-    # User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0)
-    # ).to_json
+  # post "/users/:id" do 
+    post "/mybooks" do 
+    User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0).to_json
 
     # params = {user_id: 1, book_id: 10, availble: false, rating: 0}
     

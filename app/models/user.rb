@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 
   # show available books for single user
   def show_my_books
-    User.first.books.where("available = ?", true)
+    User.last.books.where("available = ?", true)
     # self.first.books
   end
 
