@@ -31,9 +31,9 @@ class ApplicationController < Sinatra::Base
   end
 
   patch '/availablebooks/:id' do
-      userbook = UserBook.all.where("available = ?", true).find(params[:id])
+      userbook = UserBook.find(params[:id])
       attrs_to_update = params.select do |key, value| 
-        [ "availability", "user_id"].include?(key)
+        [ "available", "user_id"].include?(key)
       end
       userbook.update(attrs_to_update)
       userbook.to_json
