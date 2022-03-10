@@ -25,8 +25,19 @@ class ApplicationController < Sinatra::Base
     UserBook.all.where("available = ?", true).to_json( include: :book)
   end
 
-  post'/availablebooks' do
-    UserBook.all.where("available = ?", true).create(book_id: params[:book_id], user_id: params[:user_id, rating: params[:rating, available: true]]).to_json
+  get '/availablebooks/:id' do
+    # UserBook.books.to_json
+    UserBook.all.where("available = ?", true).find(params[:id]).to_json( include: :book)
+  end
+
+  patch '/availablebooks/:id' do
+      userbook = UserBook.all.where("available = ?", true).find(params[:id])
+      attrs_to_update = params.select do |key, value| 
+        [ "availability", "user_id"].include?(key)
+      end
+      userbook.update(attrs_to_update)
+      userbook.to_json
+    # UserBook.all.where("available = ?", true).find(params[:id]).update(availabe: false, user_id: params[:user_id]).to_json
   end
 
 
@@ -49,9 +60,8 @@ class ApplicationController < Sinatra::Base
     User.first.user_books.find(params[:id]).update(available: params[:available]).to_json
   end
 
-  # post "/users/:id" do 
     post "/mybooks" do 
-      User.first.books_plus_join_data.create(available: false, rating: 0, book: params[:book],).to_json
+      User.first.books_plus_join_data.create(book_id: params[:book_id], available: false, rating: 0, book: params[:book]).to_json
     end
 
     # User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0).to_json
