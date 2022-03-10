@@ -10,6 +10,10 @@ class ApplicationController < Sinatra::Base
   get "/users" do
     User.all.to_json
   end 
+# get current user - hardcoded as first user
+  get "/currentuser" do 
+    User.first.to_json
+  end
 
   get "/users/:id" do
     User.find(params[:id]).to_json
@@ -17,7 +21,7 @@ class ApplicationController < Sinatra::Base
 
   # all available books
   get '/availablebooks' do
-    Book.second.books_plus_join_data.to_json
+    Book.first.books_plus_join_data.to_json
     # UserBook.all.where("available = ?", true).to_json
   end
 
@@ -28,13 +32,22 @@ class ApplicationController < Sinatra::Base
   # end
 
   get "/mybooks" do
-    User.second.books_plus_join_data.to_json
+    User.first.books_plus_join_data.to_json
+  end
+
+  get '/mybooks/:id' do
+    User.first.user_books.find(params[:id]).to_json
+  end
+
+  patch '/mybooks/:id' do 
+    User.first.user_books.find(params[:id]).update(available: params[:available]).to_json
   end
 
   # post "/users/:id" do 
     post "/mybooks" do 
-      User.second.user_books.create(available: false, rating: 0).to_json
+      User.first.user_books.create(available: false, book: params[:book], rating: 0, book_id: params[:book.id]).to_json
     end
+
     # User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0).to_json
 
     # params = {user_id: 1, book_id: 10, availble: false, rating: 0}
