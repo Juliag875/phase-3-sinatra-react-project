@@ -41,11 +41,6 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  # get a book
-  # get "/mybooks/:id" do
-  #   User.find(params[:id]).books_plus_join_data.to_json
-  # end
-
   get "/mybooks" do
     User.first.books_plus_join_data.to_json
   end
@@ -61,7 +56,7 @@ class ApplicationController < Sinatra::Base
   end
 
     post "/mybooks" do 
-      User.first.books_plus_join_data.create(book_id: params[:book_id], available: false, rating: 0, book: params[:book]).to_json
+      User.first.user_books.create(book_id: params[:book_id], user_id: params[:user_id], available: false, rating: 0).to_json
     end
 
     # User.find(params[:id]).user_books.create(book_id: param[:book_id], available: false, rating: 0).to_json
