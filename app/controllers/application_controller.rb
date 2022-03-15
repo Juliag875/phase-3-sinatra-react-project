@@ -50,12 +50,11 @@ class ApplicationController < Sinatra::Base
   end
 
 
-  # patch mybook availability
   patch '/mybooks/:id' do 
     User.first.user_books.find(params[:id]).update(available: params[:available]).to_json
   end
 
-    post "/mybooks" do 
+  post "/mybooks" do 
       User.first.user_books.create(book_id: params[:book_id], user_id: params[:user_id], available: false, rating: 0).to_json
     end
 
@@ -66,20 +65,20 @@ class ApplicationController < Sinatra::Base
     # UserBook.create(params).to_json
 
 
-  patch '/books/:id' do
-    UserBook.find(params[:id]).update(rating: params[:rating]).to_json
-  end
+  # patch '/books/:id' do
+  #   UserBook.find(params[:id]).update(rating: params[:rating]).to_json
+  # end
 
-  patch '/users/:id/claim_book' do
-    UserBook.find(params[:id]).update(user_id: params[:user_id]).to_json
-  end
+  # patch '/users/:id/claim_book' do
+  #   UserBook.find(params[:id]).update(user_id: params[:user_id]).to_json
+  # end
 
-  patch '/users/:id/sell_book' do
-    UserBook.find(params[:id]).update(available: true).to_json
-  end
+  # patch '/users/:id/sell_book' do
+  #   UserBook.find(params[:id]).update(available: true).to_json
+  # end
 
-  delete '/books/:id' do
-    Book.find(params[:id]).destroy.to_json
-  end
+  # delete '/books/:id' do
+  #   Book.find(params[:id]).destroy.to_json
+  # end
 
 end
